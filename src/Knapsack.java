@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Created by Pedro on 09/05/2016.
- * Class geral. Não tem limite para o conteudo
+ * Class geral. Cada item só pode existir uma vez é ou é adicionado à mochila ou não
  */
 public class Knapsack {
 
