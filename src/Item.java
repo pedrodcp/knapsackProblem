@@ -5,7 +5,6 @@ public class Item {
     private String name    = "";
     private int weight     = 0;
     private int value      = 0;
-    private int bounding   = 1; // numero existente de items que podem entrar na mochila (Se quisermos usar isto instanciar class BoundedKnapsack)
     private int inKnapsack = 0; // numero de items deste tipo que existem na solução
 
     public Item() {}
@@ -14,7 +13,6 @@ public class Item {
         setName(item.name);
         setWeight(item.weight);
         setValue(item.value);
-        setBounding(item.bounding);
     }
 
     public Item(int _weight, int _value) {
@@ -25,7 +23,6 @@ public class Item {
     public Item(int _weight, int _value, int _bounding) {
         setWeight(_weight);
         setValue(_value);
-        setBounding(_bounding);
     }
 
     public Item(String _name, int _weight, int _value) {
@@ -38,7 +35,6 @@ public class Item {
         setName(_name);
         setWeight(_weight);
         setValue(_value);
-        setBounding(_bounding);
     }
 
     public void setName(String _name) {name = _name;}
@@ -46,19 +42,13 @@ public class Item {
     public void setValue(int _value) {value = Math.max(_value, 0);}
 
     public void setInKnapsack(int _inKnapsack) {
-        inKnapsack = Math.min(getBounding(), Math.max(_inKnapsack, 0));
+        inKnapsack = Math.max(_inKnapsack, 0);
     }
 
-    public void setBounding(int _bounding) {
-        bounding = Math.max(_bounding, 0);
-        if (bounding == 0)
-            inKnapsack = 0;
-    }
 
     public void checkMembers() {
         setWeight(weight);
         setValue(value);
-        setBounding(bounding);
         setInKnapsack(inKnapsack);
     }
 
@@ -66,5 +56,4 @@ public class Item {
     public int getWeight() {return weight;}
     public int getValue() {return value;}
     public int getInKnapsack() {return inKnapsack;}
-    public int getBounding() {return bounding;}
 }
