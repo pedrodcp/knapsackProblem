@@ -61,18 +61,33 @@ public class Knapsack {
         double initTime = System.currentTimeMillis();
         int n = itemList.size(); // numero de items
 
+        int bigO = 0;
+        
         setInitialStateForCalculation();
         if (n > 0 && maxWeight > 0) {                                  //1
             List<List<Integer>> c = new ArrayList<List<Integer>>();
             List<Integer> curr = new ArrayList<Integer>();
 
             c.add(curr);
-            for (int j = 0; j <= maxWeight; j++)                     //2 - O(n)
+            for (int j = 0; j <= maxWeight; j++){                     //2 - O(n)
+                
+                
+                bigO++;
+                
+                
                 curr.add(0);
+            }
             for (int i = 1; i <= n; i++) {                           //3 - O(n)
+                
+                bigO++;
+                
+                
                 List<Integer> prev = curr;
                 c.add(curr = new ArrayList<Integer>());
                 for (int j = 0; j <= maxWeight; j++) {               //4 - O(n)
+                    
+                    bigO++;
+                    
                     if (j > 0) {
                         int wH = itemList.get(i - 1).getWeight();
                         curr.add((wH > j) ? prev.get(j) : Math.max(prev.get(j), itemList.get(i - 1).getValue() + prev.get(j - wH)));
@@ -84,6 +99,9 @@ public class Knapsack {
             profit = curr.get(maxWeight);
 
             for (int i = n, j = maxWeight; i > 0 && j >= 0; --i) {
+                
+                bigO++;
+                
                 int tempI = c.get(i).get(j);
                 int tempI_1 = c.get(i - 1).get(j);
                 if ((i == 0 && tempI > 0) || (i > 0 && tempI != tempI_1)) {
@@ -98,6 +116,7 @@ public class Knapsack {
         } // fim do if
         double endTime = System.currentTimeMillis();
         System.out.println("Algorithm execution time: " + (endTime - initTime)/1000 + " seconds");
+        System.out.println("bigO: " + bigO);
         return itemList;
     }
 
